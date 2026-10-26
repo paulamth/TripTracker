@@ -1,0 +1,38 @@
+.title {
+    font-size: 1.1rem;
+    font-weight: 550;
+    text-align: left;
+    margin-left: 15px;
+    margin-bottom: 16px;
+    color: #3b3a3a;
+  }
+  
+  .trip-list {
+    width: 100%;
+  }
+  
+  ion-item {
+    --inner-padding-end: 10px;
+    font-size: 1rem;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  
+    ion-button {
+      width: 90%;
+      height: 40px;
+      font-size: 1.2rem;
+    }
+  
+    ion-button::part(native) {
+      border-radius: 8px !important;
+    }
+  }
+  
+  ion-button.close-button {
+    --color: #444;
+  }
+  

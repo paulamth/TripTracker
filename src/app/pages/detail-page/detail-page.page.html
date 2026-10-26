@@ -1,0 +1,176 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{ place.name }} </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="chevron-back-outline" class="clickable-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="togglePlaceHeart()">
+        <ion-icon class="heart-icon" [name]="isPlaceFav ? 'heart' : 'heart-outline'" [ngClass]="{ 'favorite': isPlaceFav, 'not-favorite': !isPlaceFav }"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="map-container">
+    <app-leaflet-map [mapId]="currentTab"></app-leaflet-map>
+
+    <!-- Wetter-Icon und Temperatur unten rechts -->
+    <div *ngIf="weatherData?.current" class="weather-info">
+      <ion-icon [name]="weatherIcon + '-outline'"></ion-icon>
+      <p>{{ weatherData.current?.temp_c }}°C</p>
+    </div>
+  </div>
+  
+  <div class="ion-padding">
+    <div class="row-container">
+      <h1>{{ place.name }} </h1>
+      <ion-button (click)="goToMap()"> <ion-icon name="navigate-outline"></ion-icon>&nbsp;  Karte</ion-button>
+    </div>
+    <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="all">
+        Überblick
+      </ion-segment-button>
+      <ion-segment-button value="cultural">
+        Attraktionen
+      </ion-segment-button>
+      <ion-segment-button value="foods">
+        Restaurants
+      </ion-segment-button>
+      <ion-segment-button value="accomodations">
+        Hotels
+      </ion-segment-button>
+    </ion-segment>
+
+        <!-- Anzeige der Suchergebnisse -->
+
+    
+    <ng-container *ngIf="selectedSegment === 'all'">
+      <ion-list *ngIf="places">
+        <ion-item *ngFor="let place of places" class="expandable-item">
+          <div class="item-header" [ngClass]="{'hidden-label': expandedItem === place.id}">
+            <ion-label>
+              <ion-icon [name]="place.icon"></ion-icon>
+              {{ place.name }}
+            </ion-label>
+              <ion-icon [name]="expandedItem === place.id ? 'chevron-up-outline' : 'chevron-down-outline'" (click)="showAttractionDetails(place)" class="clickable-icon"></ion-icon>
+          </div>
+          
+          <div *ngIf="expandedItem === place.id" class="expanded-content">
+            <div class="title-container">
+              <div class="label-container">
+              <ion-icon [name]="place.icon"></ion-icon>
+              {{ place.name }}
+              </div>
+              <div class="icon-container">
+                <ion-icon [name]="isAttractionFav ? 'heart' : 'heart-outline'" (click)="toggleAttractionHeart(place)" class="clickable-icon" [ngClass]="{ 'favorite': isAttractionFav, 'not-favorite': !isAttractionFav }"></ion-icon>
+                <ion-icon name="chevron-up-outline" (click)="showAttractionDetails(place)" class="clickable-icon"></ion-icon>
+              </div>
+            </div>
+            <app-attraction-details [placeId]="place.id"></app-attraction-details>
+          </div>
+          <br>
+        </ion-item>
+      </ion-list>
+      <div class="mehr-anzeigen-container"> 
+        <a (click)="loadMore()" *ngIf="hasMorePlaces" class="mehr-anzeigen-text">Mehr anzeigen</a>
+      </div>
+    </ng-container>
+    
+    <ng-container *ngIf="selectedSegment === 'cultural'">
+      <ion-list *ngIf="places">
+        <ion-item *ngFor="let place of places" class="expandable-item">
+          <div class="item-header" [ngClass]="{'hidden-label': expandedItem === place.id}">
+            <ion-label>
+              <ion-icon [name]="place.icon"></ion-icon>
+              {{ place.name }}
+            </ion-label>
+              <ion-icon [name]="expandedItem === place.id ? 'chevron-up-outline' : 'chevron-down-outline'" (click)="showAttractionDetails(place)" class="clickable-icon"></ion-icon>
+          </div>
+          
+          <div *ngIf="expandedItem === place.id" class="expanded-content">
+            <div class="title-container">
+              <div class="label-container">
+                <ion-icon [name]="place.icon"></ion-icon>
+                {{ place.name }}
+                </div>
+              <div class="icon-container">
+                <ion-icon [name]="isAttractionFav ? 'heart' : 'heart-outline'" (click)="toggleAttractionHeart(place)" class="clickable-icon" [ngClass]="{ 'favorite': isAttractionFav, 'not-favorite': !isAttractionFav }"></ion-icon>
+                <ion-icon name="chevron-up-outline" (click)="showAttractionDetails(place)" class="clickable-icon"></ion-icon>
+              </div>
+            </div>
+            <app-attraction-details [placeId]="place.id"></app-attraction-details>
+          </div>
+        </ion-item>
+      </ion-list>
+      <div class="mehr-anzeigen-container"> 
+        <a (click)="loadMore()" *ngIf="hasMorePlaces" class="mehr-anzeigen-text">Mehr anzeigen</a>
+      </div>
+    </ng-container>
+    
+    <ng-container *ngIf="selectedSegment === 'foods'">
+      <ion-list *ngIf="places">
+        <ion-item *ngFor="let place of places" class="expandable-item">
+          <div class="item-header"[ngClass]="{'hidden-label': expandedItem === place.id}">
+            <ion-label>
+              <ion-icon [name]="place.icon"></ion-icon>
+              {{ place.name }}
+            </ion-label>
+              <ion-icon [name]="expandedItem === place.id ? 'chevron-up-outline' : 'chevron-down-outline'" (click)="showAttractionDetails(place)" class="clickable-icon"></ion-icon>
+          </div>
+          <div *ngIf="expandedItem === place.id" class="expanded-content">
+            <div class="title-container">
+              <div class="label-container">
+                <ion-icon [name]="place.icon"></ion-icon>
+                {{ place.name }}
+                </div>
+              <div class="icon-container">
+                <ion-icon [name]="isAttractionFav ? 'heart' : 'heart-outline'" (click)="toggleAttractionHeart(place)" class="clickable-icon" [ngClass]="{ 'favorite': isAttractionFav, 'not-favorite': !isAttractionFav }"></ion-icon>
+                <ion-icon name="chevron-up-outline" (click)="showAttractionDetails(place)" class="clickable-icon"></ion-icon>
+              </div>
+            </div>
+            <app-attraction-details [placeId]="place.id"></app-attraction-details>
+          </div>
+        </ion-item>
+      </ion-list>
+      <div class="mehr-anzeigen-container"> 
+        <a (click)="loadMore()" *ngIf="hasMorePlaces" class="mehr-anzeigen-text">Mehr anzeigen</a>
+      </div>
+    </ng-container>
+    
+    <ng-container *ngIf="selectedSegment === 'accomodations'">
+      <ion-list *ngIf="places">
+        <ion-item *ngFor="let place of places" class="expandable-item">
+          <div class="item-header" [ngClass]="{'hidden-label': expandedItem === place.id}">
+            <ion-label>
+              <ion-icon [name]="place.icon"></ion-icon>
+              {{ place.name }} 
+            </ion-label>
+              <ion-icon [name]="expandedItem === place.id ? 'chevron-up-outline' : 'chevron-down-outline'" (click)="showAttractionDetails(place)" class="clickable-icon"></ion-icon>
+          </div>
+          
+          <div *ngIf="expandedItem === place.id" class="expanded-content">
+            <div class="title-container">
+              <div class="label-container">
+                <ion-icon [name]="place.icon"></ion-icon>
+                {{ place.name }}
+                </div>
+              <div class="icon-container">
+                <ion-icon [name]="isAttractionFav ? 'heart' : 'heart-outline'" (click)="toggleAttractionHeart(place)" class="clickable-icon" [ngClass]="{ 'favorite': isAttractionFav, 'not-favorite': !isAttractionFav }"></ion-icon>
+                <ion-icon name="chevron-up-outline" (click)="showAttractionDetails(place)" class="clickable-icon"></ion-icon>
+              </div>
+            </div>
+            <app-attraction-details [placeId]="place.id"></app-attraction-details>
+          </div>
+        </ion-item>
+      </ion-list>
+      <div class="mehr-anzeigen-container"> 
+        <a (click)="loadMore()" *ngIf="hasMorePlaces" class="mehr-anzeigen-text">Mehr anzeigen</a>
+      </div>
+    </ng-container>
+
+  </div>
+</ion-content>

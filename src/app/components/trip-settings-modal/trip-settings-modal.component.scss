@@ -1,0 +1,80 @@
+
+  
+  .input-container {
+    width: 90%;
+    margin: 0 auto 16px;
+  }
+  
+  .input-label {
+    font-size: 0.9rem;
+    color: #3b3a3a;
+    margin-bottom: 4px;
+    display: block;
+    font-weight: 600;
+  }
+  
+  .custom-item {
+    --inner-padding-end: 10px;
+    --border-color: transparent; 
+    --border-style: none;
+    border-bottom: 1px solid #ccc; 
+    width: 100%;
+    background: transparent;
+  
+    ion-input, ion-textarea {
+      font-size: 1rem;
+      padding: 12px;
+    }
+
+    ion-datetime {
+        background: #fff; 
+        border: 1px solid #aaa; 
+        border-radius: 8px;  
+        padding: 8px;
+        width: 100%;
+        margin: 15px 0;
+      }
+
+    ion-datetime:hover,
+    ion-datetime:focus,
+    ion-datetime:active {
+        background: #fff !important;  
+        border: 1px solid #aaa !important;
+        box-shadow: none !important;
+    }
+  }
+  
+  .date-range {
+    text-align: left;
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 8px;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 8px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+  
+    ion-button {
+      width: 90%;
+      height: 40px;
+      font-size: 1.2rem;
+    }
+  
+    ion-button::part(native) {
+      border-radius: 8px !important;
+    }
+  }
+  
+  ion-button.close-button {
+    --color: #444;
+  }
+  

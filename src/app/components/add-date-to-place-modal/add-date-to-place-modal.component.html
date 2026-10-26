@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Tagesplanung für {{ trip!.name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="close-button" (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2 class="title">Wählen Sie Unternehmungen für den {{ date }} aus.</h2>
+
+  <ion-list class="custom-list">
+    <ion-item class="custom-item" *ngFor="let place of places">
+      <ion-label>{{ place.name }}</ion-label>
+      <ion-checkbox 
+        slot="end" 
+        [(ngModel)]="place.selected" >
+      </ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <div class="button-container">
+    <ion-button expand="full" (click)="save()">Hinzufügen</ion-button>
+  </div>
+</ion-content>

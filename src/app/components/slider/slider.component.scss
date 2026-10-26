@@ -1,0 +1,61 @@
+div{
+    margin-top: 10px;
+    height: 35vh;
+}
+.slider{
+    min-height: 35vh; 
+    height: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+swiper-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+.slider img{
+    width: 100%;
+    height: 30vh;
+    border-radius: 5px;
+    object-fit: cover; 
+    object-position: center;
+}
+
+.heart-container {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    width: 33px;
+    height: 33px; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.75); 
+    border-radius: 50%; 
+    z-index: 10;
+}
+
+
+.favorite {
+    width: 23px;
+    height: 25px; 
+    color: #FF6F61; 
+  }
+  
+  .not-favorite {
+    width: 23px;
+    height: 25px; 
+    color: #75767B; 
+  }
+  
+
+figcaption{
+    font-size: 17px;
+    display: block;
+}

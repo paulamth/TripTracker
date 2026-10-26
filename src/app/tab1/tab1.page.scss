@@ -1,0 +1,163 @@
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem; 
+}
+
+.bild-section {
+  position: relative;
+  background: linear-gradient(rgba(128, 128, 128, 0.5), rgba(128, 128, 128, 0.5)), 
+  url('../../assets/img/banner.jpg') no-repeat center center/cover;
+  height: 30vh; 
+  margin-bottom: 1rem; 
+}
+
+.bild-text {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+}
+
+.bild-text h1 {
+  font-size: 26px;
+  margin: 0.1rem 0;
+  font-weight: 800;
+}
+
+.bild-text p {
+  font-size:16px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.default-btn {
+--background: #f4f4f4;
+--color: #000;  
+}
+
+.selected-btn {
+--background: #1D4ED8;  
+--color: white;  
+}
+
+.map-button{
+  margin-top: 20px;
+}
+
+
+.last-search {
+  background-color: #f1f1f1;
+  padding: 20px 50px;
+  text-align: center;
+  border-radius: 8px;
+  margin: 5px 15px 40px;
+}
+
+.last-search h2 {
+  font-size: 22px;
+  color: black;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.last-search strong {
+  font-size: 18px;
+  color: #383838;
+  margin-top: 5px;
+}
+
+.last-search p {
+  font-size: 15px;
+  color: black;
+  margin-bottom: 15px;
+}
+
+.last-search .btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #1D4ED8;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.arrow {
+  margin-left: 5px;
+}
+
+.map-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  text-decoration: none; 
+  cursor: pointer;
+  margin-top: 0;
+  background-color: #f1f1f1;
+  margin-bottom: 25px;
+}
+
+.map-icon {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  margin-right: 15px;
+  border-radius: 8px;;
+  filter: contrast(1.2);
+  border: solid 1px rgb(195, 195, 195);
+}
+
+.explore-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+}
+
+.explore-text {
+  font-size: 16px;
+  font-weight: 670;
+  margin: 0;
+  color:#2e2e2e
+}
+
+.subtitle-text {
+  font-size: 15px; 
+  font-weight: 850;
+  color: #1D4ED8;
+  margin: 2px 0 0 0; 
+  text-align: right;
+}
+
+.profile-button ion-button {
+  --background: transparent; 
+  --color: black; 
+  padding: 0; 
+  position: absolute;
+  top: 10px; 
+  right: 10px; 
+}
+
+.profile-button ion-icon {
+  font-size: 27px; 
+}
+
+h4{
+  font-size:18px;
+  font-weight: 650;
+  color: #3a3a3a;
+  margin-top: 7px;
+}
+
+h2{
+  font-weight: 650;
+  font-size: 25px;
+  margin: 0.1rem 0;
+}
+

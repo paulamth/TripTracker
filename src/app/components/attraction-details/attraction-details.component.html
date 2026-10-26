@@ -1,0 +1,18 @@
+<ion-card *ngIf="attractionDetails">
+  <ion-card-header class="card-header">
+    <img [src]="attractionDetails.preview?.source || 'assets/img/default.jpg'" alt="Attraction Image" class="card-image"/>
+    <div class="card-details">
+      <ion-card-content>
+        <p><strong>Adresse:</strong></p>
+        <p *ngIf="attractionDetails.address?.house_number">{{ attractionDetails.address.house_number }} </p>
+        <p *ngIf="attractionDetails.address?.street">{{ attractionDetails.address.street }}</p>
+        <p *ngIf="attractionDetails.address?.postcode">{{ attractionDetails.address.postcode }}</p>
+        <p *ngIf="attractionDetails.address?.city">{{ attractionDetails.address.city }}</p>
+        <p *ngIf="attractionDetails.address?.state">{{ attractionDetails.address.state }}</p>
+        <p *ngIf="attractionDetails.address?.country">{{ attractionDetails.address.country }}</p>
+        <p *ngIf="attractionDetails.wikipedia"><strong>Wikipedia:</strong> <a [href]="attractionDetails.wikipedia" target="_blank">{{ attractionDetails.wikipedia }}</a></p>
+        <p *ngIf="attractionDetails.url"><strong>Webseite:</strong> <a [href]="attractionDetails.url" target="_blank">{{ attractionDetails.url }}</a></p>
+      </ion-card-content>
+    </div>
+  </ion-card-header>
+</ion-card>

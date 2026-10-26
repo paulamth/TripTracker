@@ -1,0 +1,33 @@
+<ion-content [fullscreen]="true" class="ion-padding" *ngIf="user">
+  <h1>Profil</h1>
+
+  <div class="profile-image-container">
+    <img 
+      [src]="user.profilePicture" 
+      alt="Profilbild" 
+      class="profile-image" 
+      (click)="selectImageFromGallery()" />
+  </div>
+
+  <ion-list class="custom-list">
+    <ion-item class="custom-item">
+      <ion-label>Name</ion-label>
+      <p>{{ user.firstname }} {{ user.lastname }}</p>
+    </ion-item>
+    
+    <ion-item class="custom-item">
+      <ion-label>Email</ion-label>
+      <p>{{ user.email }}</p>
+    </ion-item>
+
+    <ion-item class="custom-item">
+      <ion-label>Mitglied seit</ion-label>
+      <p>{{ user.createdAt | date }}</p>
+    </ion-item>
+  </ion-list>
+
+  <div class="button-container">
+    <ion-button expand="full" (click)="logout()">Abmelden</ion-button>
+    <ion-button expand="full" color="danger" (click)="deleteProfile()">Konto löschen</ion-button>
+  </div>
+</ion-content>

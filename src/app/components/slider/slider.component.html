@@ -1,0 +1,18 @@
+<div>
+    <swiper-container #swiper [modules]="swiperModules"
+    [slidesPerView]="1.4"
+    [initialSlide]="1"
+    [spaceBetween]="15">
+    <swiper-slide *ngFor="let slide of slides; let i = index" (click)="onSlideClick(i)" class="slider">
+              <img [src]="slide?.slider"/>
+              <figcaption> <b> {{ slide.name }}</b> </figcaption>
+              <div class="heart-container" (click)="toggleFavorite(i, $event)">
+                <ion-icon 
+                [name]="slide.isFavorite ? 'heart' : 'heart-outline'" 
+                class="favorite-icon"
+                [ngClass]="{ 'favorite': slide.isFavorite, 'not-favorite': !slide.isFavorite }">
+              </ion-icon>
+              </div>
+      </swiper-slide>
+    </swiper-container>
+</div>

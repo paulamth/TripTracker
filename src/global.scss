@@ -1,0 +1,183 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+@import "node_modules/leaflet/dist/leaflet.css";
+
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+ion-header {
+    ion-toolbar {
+      height: 40px; 
+    }
+}
+
+ion-button::part(native) {
+  border-radius: 8px !important;
+}
+
+h1{
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: xx-large;
+  font-weight:600;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 0.25em;
+  margin-left: 15px;
+}
+
+ion-toolbar {
+    --background: transparent; 
+    background: var(--ion-background-color); 
+}
+
+
+ion-input,
+ion-datetime,
+ion-textarea {
+  padding-top: 10px; 
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+  }
+  
+  .item-header.hidden-label {
+    display: none; 
+  }
+  
+  .expandable-item {
+    display: block;
+    width: 100%;
+  }
+  
+  .expanded-content {
+    display: block;
+    width: 100%;
+    padding: 0;
+  }
+
+  ion-label{
+    text-overflow: ellipsis !important;
+    white-space: nowrap; 
+    overflow: hidden
+  }
+
+  .label-container{
+    text-overflow: ellipsis !important;
+    white-space: nowrap; 
+    overflow: hidden
+  }
+  
+  ion-card {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-shadow: none; 
+    border: none;
+  }
+
+  .card-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+  }
+  
+  .card-image {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: cover;
+    margin-right: 15px;
+  }
+
+  .title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+  }
+  
+  .card-details {
+    flex: 1;
+  }
+
+  .title-container .icon-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .clickable-icon {
+    margin-left: 12px; 
+    cursor: pointer; 
+    user-select: none; 
+    width: 19px;
+    height: 21px; 
+  }
+
+.clickable-icon:focus,
+.clickable-icon:hover {
+  background-color: transparent;
+  outline: none; 
+}
+
+  .item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .icon-container {
+    display: flex;
+    align-items: center;
+  }
+
+// Passwortfeld im Dialog "Konto löschen" deutlich sichtbar machen
+.delete-account-alert .alert-input {
+  border: 1px solid var(--ion-color-medium);
+  border-radius: 6px;
+  padding: 8px 10px;
+}

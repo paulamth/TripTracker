@@ -1,0 +1,32 @@
+
+  .icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto; 
+  }
+  
+  .splash-logo {
+    width: 160px; 
+    height: 160px;
+    margin-top: 45%;
+  }
+  
+  .app-title {
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+    margin: 0;
+    color: #333
+  }
+  
+  .text {
+    position: absolute; 
+    bottom: 10; 
+    width: 100%;
+}
+
+ion-content {
+  --background: #f6f7ff; 
+}

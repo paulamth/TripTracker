@@ -1,0 +1,42 @@
+.fade-out {
+    animation: fadeOut 0.3s forwards;
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .favorite {
+    width: 21px;
+    height: 23px; 
+    color: #FF6F61; 
+  }
+  
+  .not-favorite {
+    width: 21px;
+    height: 23px; 
+    color: #75767B; 
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 500;
+    color: #191919;
+  }
+
+  .title-container .icon-container {
+    margin-top: -15px;
+    margin-right: 8px;
+  }
+
+  .title-container{
+    margin-top: -1.5px;
+  }
+  
+  
+  

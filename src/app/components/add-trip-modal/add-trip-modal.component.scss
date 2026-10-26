@@ -1,0 +1,62 @@
+.title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-container {
+    width: 90%;
+    margin: 0 auto 16px;
+  }
+  
+  .input-label {
+    font-size: 0.9rem;
+    color: #3b3a3a;
+    margin-bottom: 4px;
+    display: block;
+    font-weight: 600;
+  }
+  
+  .custom-item {
+    --border-radius: 12px;
+    --border-color: #aaa;
+    --padding-start: 12px;
+    background: #fff;
+    border: 1px solid #aaa;
+    border-radius: 12px;
+    width: 100%;
+  
+    ion-input {
+      font-size: 1rem;
+      padding: 12px;
+    }
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 8px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  
+    ion-button {
+      width: 90%;
+      height: 40px;
+      font-size: 1.2rem;
+    }
+
+    ion-button::part(native) {
+        border-radius: 8px !important; 
+      }
+  }
+  
+  ion-button.close-button {
+    --color: #444; 
+  }
+  

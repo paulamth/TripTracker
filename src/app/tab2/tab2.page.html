@@ -1,0 +1,101 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h1> Suchen </h1>
+  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="trip">
+      Reiseziel
+    </ion-segment-button>
+    <ion-segment-button value="attraction">
+      Attraktionen
+    </ion-segment-button>
+  </ion-segment>
+
+  <ion-searchbar 
+    #searchBar
+    [(ngModel)]="searchTerm" 
+    (ionInput)="searchPlaces()" 
+    [placeholder]="placeholderText" 
+    (ionClear)="clearResults()">
+  </ion-searchbar>
+
+  <ng-container *ngIf="selectedSegment === 'trip'">
+    <ng-container *ngIf="countries.length > 0">
+      <h2>Länder</h2>
+      <ion-list>
+        <ion-item *ngFor="let country of countries" (click)="selectPlace(country)">
+          {{ country.name }}
+        </ion-item>
+      </ion-list>
+    </ng-container>
+
+    <ng-container *ngIf="cities.length > 0">
+      <h2>Städte</h2>
+      <ion-list>
+        <ion-item *ngFor="let city of cities" (click)="selectPlace(city)">
+          {{ city.name }}
+        </ion-item>
+      </ion-list>
+    </ng-container>
+
+    <ng-container *ngIf="countries.length === 0 && cities.length === 0 && searchTerm.length > 0">
+      <h2>Keine Suchergebnisse gefunden</h2>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="selectedSegment === 'attraction'">
+    <ng-container *ngIf="attractions.length > 0">
+      <ion-list>
+          <ion-item *ngFor="let attraction of attractions" class="expandable-item">
+            <div class="item-header" (click)="showAttractionDetails(attraction)" [ngClass]="{'hidden-label': expandedItem === attraction.id}">
+              <ion-label>
+                {{ attraction.name }}
+              </ion-label>
+                <ion-icon [name]="expandedItem === attraction.id ? 'chevron-up-outline' : 'chevron-down-outline'" class="clickable-icon"></ion-icon>
+            </div>
+            
+            <div *ngIf="expandedItem === attraction.id" class="expanded-content">
+              <div class="title-container">
+                {{ attraction.name }}
+                <div class="icon-container">
+                  <ion-icon [name]="isAttractionFav ? 'heart' : 'heart-outline'" (click)="toggleAttractionHeart(attraction)" class="clickable-icon" [ngClass]="{ 'favorite': isAttractionFav, 'not-favorite': !isAttractionFav }"></ion-icon>
+                  <ion-icon name="chevron-up-outline" (click)="showAttractionDetails(attraction)" class="clickable-icon"></ion-icon>
+                </div>
+              </div>
+              <app-attraction-details [placeId]="attraction.id"></app-attraction-details>
+            </div>
+        </ion-item>
+      </ion-list>
+    </ng-container>
+    <ng-container *ngIf="(attractions.length === 0 && searchTerm.length >= 3) || searchTerm.length < 3 && searchTerm.length>0">
+      <h2>Keine Suchergebnisse gefunden</h2>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="searchTerm === ''">
+    <ng-container *ngIf="searchHistory.length > 0">
+      <h2 class="h2-suchanfragen">Deine letzten Suchanfragen</h2>
+      <ion-list>
+      <ion-item *ngFor="let place of searchHistory" [ngClass]="{'expandable-item': place.kind === 'attraction'}">
+        <ng-container *ngIf="place.kind === 'attraction'; else normalItem">
+          <div class="item-header" [ngClass]="{'hidden-label': expandedItem === place.id}"  (click)="showAttractionDetails(place)">
+            <ion-label>
+              {{ place.name }}
+            </ion-label>
+          </div>
+          <div *ngIf="expandedItem === place.id" class="expanded-content">
+            <div class="title-container">
+              {{ place.name }}
+              <ion-icon name="chevron-up-outline" (click)="showAttractionDetails(place)" class="clickable-icon"></ion-icon>
+            </div>
+            <app-attraction-details [placeId]="place.id"></app-attraction-details>
+          </div>
+        </ng-container>
+        <ng-template #normalItem>
+          <ion-label (click)="selectPlace(place)">
+            {{ place.name }}
+          </ion-label>
+        </ng-template>
+      </ion-item>
+    </ion-list>
+    </ng-container>
+  </ng-container>
+</ion-content>

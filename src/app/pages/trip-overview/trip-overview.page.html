@@ -1,0 +1,103 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+  </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="search()">
+        <ion-icon name="search-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="openSettings()">
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h1>{{ trip.name }} </h1>
+
+  <p class="description" *ngIf="trip.startDate && trip.endDate">Zeitraum: {{ trip.startDate }} - {{ trip.endDate }}</p>
+  <p class="description" *ngIf="trip.description">{{ trip.description }}</p> <br>
+
+  <ion-segment [(ngModel)]="selectedSegment" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="all">
+      Überblick
+    </ion-segment-button>
+    <ion-segment-button value="planning">
+      Reiseablauf
+    </ion-segment-button>
+  </ion-segment>
+
+  <ng-container *ngIf="selectedSegment === 'all'">
+     <ng-container *ngIf="places.length === 0">
+      <div class="empty-state-container">
+        <p>Suchen Sie nach Orten oder Attraktionen für Ihren Trip </p>
+        <ion-button (click)="search()">
+          suchen
+        </ion-button>
+      </div>
+    </ng-container>
+    <ion-list>
+      <ion-item *ngFor="let place of places" class="expandable-item">
+        <div class="item-header"  (click)="selectPlace(place)" [ngClass]="{'hidden-label': expandedItem === place.id}">
+          <ion-label>
+            {{ place.name }}
+          </ion-label>
+          <div class="icon-container">
+            <ion-button fill="clear" color="danger" (click)="removePlace(place, $event)">
+              <ion-icon class="clickable-icon" slot="icon-only" name="close-outline"></ion-icon>
+            </ion-button>
+          </div>       
+        </div>
+
+        <div *ngIf="expandedItem === place.id" class="expanded-content">
+          <div class="title-container" (click)="selectPlace(place)">
+            {{ place.name }}
+            <ion-button fill="clear" color="danger" (click)="removePlace(place, $event)">
+              <ion-icon class="clickable-icon" slot="icon-only" name="close-outline"></ion-icon>
+            </ion-button>
+          </div>
+          <app-attraction-details [placeId]="place.id"></app-attraction-details>
+        </div>      
+      </ion-item>
+    </ion-list>
+  </ng-container>
+  
+  <ng-container *ngIf="selectedSegment === 'planning'">
+      <ng-container *ngIf="daysInRange.length === 0">
+        <div class="empty-state-container">
+          <p>Legen Sie einen Zeitraum für Ihren Trip fest</p>
+          <ion-button (click)="openSettings()">
+            Zeitraum festlegen
+          </ion-button>
+        </div>
+      </ng-container>
+      <ion-list>
+      <ng-container *ngFor="let day of daysInRange">
+        <ion-item>
+          <ion-label [ngClass]="{'past-date': day.isPast}">
+            {{ day.date }}
+          </ion-label>
+          <ion-button fill="clear" *ngIf="!day.isPast && day.hasAvailablePlaces" (click)="addDate(trip, day.date)">
+            <ion-icon class="clickable-icon" slot="icon-only" name="add-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+  
+        <ng-container *ngFor="let place of day.places">
+          <ion-item class="expandable-item">
+              <ion-label>
+                {{ place.name }}
+              </ion-label>
+                <ion-button fill="clear" color="danger" (click)="removePlaceFromDate(day.date, place, $event)">
+                  <ion-icon class="clickable-icon" slot="icon-only" name="close-outline"></ion-icon>
+                </ion-button>
+          </ion-item>
+        </ng-container>
+      </ng-container>
+    </ion-list>
+  </ng-container>
+
+</ion-content>

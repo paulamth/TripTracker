@@ -1,0 +1,47 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h1> Merkliste </h1>
+
+  <ng-container *ngIf="wishlist.length > 0; else noWishlist">
+  <ion-list>
+    <ion-item *ngFor="let place of wishlist; let i = index">
+      <ion-label (click)="selectPlace(place)" class="item-header" [ngClass]="{'hidden-label': expandedItem === place.id}">
+        <div class="item-content">
+          <p>{{ place.name }}</p>
+          <div class="icon-container">
+            <ion-icon slot="icon-only" name="add-outline" (click)="addToTrip(place, $event)" class="clickable-icon"></ion-icon>
+            <ion-icon 
+              [name]="isFavorite[i] ? 'heart' : 'heart-outline'" 
+              class="clickable-icon"
+              (click)="deleteFromWishlist(i, $event)"
+              [ngClass]="{ 'favorite': isFavorite[i], 'not-favorite': !isFavorite[i] }">
+            </ion-icon>
+          </div>
+        </div>
+      </ion-label>
+
+      <div *ngIf="expandedItem === place.id" class="expanded-content">
+        <div class="title-container" (click)="closeDetails(place.id)">
+          <p>{{ place.name }}</p>
+          <div class="icon-container">
+            <ion-icon slot="icon-only" name="add-outline" (click)="addToTrip(place, $event)" class="clickable-icon"></ion-icon>
+            <ion-icon 
+              [name]="isFavorite[i] ? 'heart' : 'heart-outline'" 
+              class="clickable-icon"
+              (click)="deleteFromWishlist(i, $event)"
+              [ngClass]="{ 'favorite': isFavorite[i], 'not-favorite': !isFavorite[i] }">
+            </ion-icon>
+          </div>
+        </div>
+        <app-attraction-details [placeId]="place.id"></app-attraction-details>
+      </div>
+    </ion-item>
+  </ion-list>
+</ng-container>
+
+  <ng-template #noWishlist>
+    <div style="text-align: center; margin-top: 50px;">
+      <p>Ihre Merkliste ist leer. <br> Suchen Sie nach schönen Orten.</p>
+      <ion-button  (click)="search()">Suchen</ion-button>
+    </div>
+  </ng-template>
+</ion-content>

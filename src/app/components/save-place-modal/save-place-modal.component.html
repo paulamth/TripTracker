@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Speicherort auswählen</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="close-button" (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2 class="title">Wohin soll '{{ place.name }}' gespeichert werden?</h2>
+
+  <ion-list class="trip-list">
+    <ion-item lines="full">
+      <ion-label>Merkliste</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="isWishlistSelected" (ionChange)="toggleWishlistSelection()"></ion-checkbox>
+    </ion-item>
+
+    <ion-item lines="full" *ngFor="let trip of trips">
+      <ion-label>{{ trip.name }}</ion-label>
+      <ion-checkbox 
+        slot="end" 
+        [(ngModel)]="trip.selected" 
+        (ionChange)="toggleSelection(trip)">
+      </ion-checkbox>
+    </ion-item>
+  </ion-list>
+
+  <div class="button-container">
+    <ion-button expand="full" (click)="save()">Speichern</ion-button>
+  </div>
+</ion-content>

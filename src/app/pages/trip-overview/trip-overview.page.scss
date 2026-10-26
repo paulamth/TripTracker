@@ -1,0 +1,44 @@
+.past-date {
+  color: #d3d3d3; /* Helles Grau */
+}
+
+.empty-state-container {
+  margin-top: 40px;
+  align-items: center;
+  text-align: center;
+  padding: 16px;
+}
+  
+
+ion-header ion-icon {
+  color: black; 
+}
+
+ion-header ion-button {
+  color: black; 
+}
+
+ion-header {
+  box-shadow: none;
+  --border-width: 0;
+  --background: white; 
+  --ion-background-color: white;
+}
+
+ion-toolbar {
+  --border-width: 0; 
+  --ion-toolbar-border-color: transparent; 
+  box-shadow: none; 
+  --background: white; 
+  --ion-background-color: white;
+}
+
+.description{
+  margin: 0;
+  font-weight: 600;
+  color: #434343;
+}
+
+.title-container{
+  margin-top: -6.5px;
+}

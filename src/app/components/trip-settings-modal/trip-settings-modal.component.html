@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Reise-Einstellungen</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="close-button" (click)="dismiss()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="saveChanges()">
+    <div class="input-container">
+      <label class="input-label">Reisename</label>
+      <ion-item class="custom-item">
+        <ion-input [(ngModel)]="newName" name="name" [placeholder]="trip.name"></ion-input>
+      </ion-item>
+    </div>
+
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <div class="input-container">
+      <label class="input-label">Zeitraum</label>
+      <p class="date-range">
+        Ausgewählter Zeitraum: <span *ngIf="startDate && endDate">{{ startDate }} - {{ endDate }}</span>
+      </p>
+      <ion-item class="custom-item">
+        <ion-datetime 
+          presentation="date"
+          [multiple]="true"
+          [value]="selectedDates"
+          (ionChange)="onDateChange($event)">
+        </ion-datetime>
+      </ion-item>
+    </div>
+
+    <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+    <div class="input-container">
+      <label class="input-label">Beschreibung</label>
+      <ion-item class="custom-item">
+        <ion-textarea [(ngModel)]="trip.description" name="description"></ion-textarea>
+      </ion-item>
+    </div>
+
+    <div class="button-container">
+      <ion-button expand="full" type="submit">Speichern</ion-button>
+    </div>
+
+    <div class="button-container">
+      <ion-button expand="full" color="danger" (click)="deleteTrip()">Reise löschen</ion-button>
+    </div>
+  </form>
+</ion-content>

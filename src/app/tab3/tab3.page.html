@@ -1,0 +1,44 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h1> Planen </h1>
+
+  <ng-container *ngIf="trips.length > 0; else noTrips">
+  <ion-item>
+    <ion-label>Sortieren nach</ion-label>
+    <ion-select [(ngModel)]="selectedSortOption" (ionChange)="onSortOptionChange()">
+      <ion-select-option value="name">Name</ion-select-option>
+      <ion-select-option value="placeCount">Anzahl gespeicherter Orte</ion-select-option>
+      <ion-select-option value="dateRange">Datum</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let trip of trips" (click)="selectTrip(trip)">
+      <ion-label style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <p class="trip-name">{{ trip.name }}</p>
+          <p *ngIf="trip.startDate && trip.endDate" class="time">
+            {{ trip.startDate }} - {{ trip.endDate }}
+          </p>
+        </div>
+        <div style="display: flex; align-items: center; color: gray;">
+          <ion-icon name="heart-outline" style="margin-right: 4px;"></ion-icon>
+          <span>{{ placeCounts[trip.name] }}</span>
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openAddPlaceDialog()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ng-container>
+
+  <ng-template #noTrips>
+    <div class="empty-list">
+      <p>Erstellen und Planen Sie Ihre erste Reise</p>
+      <ion-button (click)="openAddPlaceDialog()">Hinzufügen</ion-button>
+    </div>
+  </ng-template>
+
+</ion-content>

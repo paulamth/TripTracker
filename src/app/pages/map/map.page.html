@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{place.name}}
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Kategorien -->
+  <div class="categories-scroll">
+    <ion-item 
+      *ngFor="let category of categories"
+      [class.selected]="category.selected" 
+      (click)="category.selected = !category.selected; loadNearbyPlaces()"
+      lines="none"
+      class="kategorien">
+      <ion-label class="kategorie-label">{{ category.label }}</ion-label>
+    </ion-item>
+  </div>
+
+  <!-- Karte -->
+  <div class="map-container">
+    <app-leaflet-map></app-leaflet-map>
+     <div *ngIf="weatherData?.current" class="weather-info">
+      <ion-icon [name]="weatherIcon + '-outline'"></ion-icon>
+      <p>{{ weatherData.current?.temp_c }}°C</p>
+    </div>
+  </div>
+
+  <!-- Ergebnisse -->
+  <div class="results-container">
+    <div class="scroll-container" *ngIf="!selectedPlace">
+    <ion-list>
+     <ion-item *ngFor="let place of places" (click)="setSelectedPlace(place)">
+        <ion-label>
+          <ion-icon [name]="place.icon"></ion-icon>
+          {{ place.name }}
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    </div>
+    <div *ngIf="selectedPlace" class="selectedPlace">
+      <div class="title-container">
+        <div class="label-container">
+        <ion-icon [name]="selectedPlace.icon"></ion-icon>
+        {{ selectedPlace.name }}
+        </div>
+        <div class="icon-container">
+          <ion-icon name="close-outline" (click)="clearSelectedPlace()"></ion-icon>
+        </div>
+      </div>
+      <app-attraction-details [placeId]="selectedPlace.id"></app-attraction-details>
+    </div>
+  </div>
+</ion-content>
+    
+  

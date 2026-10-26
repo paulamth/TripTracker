@@ -1,0 +1,23 @@
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <h1 class="app-title">TripTracker</h1>
+
+    <ion-list class="input-list">
+      <ion-item class="input-box">
+        <ion-input placeholder="Email" [(ngModel)]="email" type="email" (ionInput)="resetError()"></ion-input>
+      </ion-item>
+
+      <ion-item class="input-box">
+        <ion-input placeholder="Passwort" [(ngModel)]="password" type="password" (ionInput)="resetError()"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
+    <ion-button expand="full" class="login-button" (click)="login()">Anmelden</ion-button>
+
+    <p class="register-text">
+      Noch kein Konto? <a (click)="register()">Jetzt registrieren</a>
+    </p>
+  </div>
+</ion-content>

@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button class="close-button" (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h2 class="title">Reise erstellen</h2>
+
+  <div class="input-container">
+    <label class="input-label">Name der Reise</label>
+    <ion-item class="custom-item">
+      <ion-input
+        [(ngModel)]="name"
+        (ionInput)="clearError()"
+        placeholder="z.B. Sommerurlaub in Turin"
+      ></ion-input>
+    </ion-item>
+  </div>
+
+  <div *ngIf="error" class="error-message">{{ error }}</div>
+
+  <div class="button-container">
+    <ion-button expand="full" (click)="addTrip()">Hinzufügen</ion-button>
+  </div>
+</ion-content>

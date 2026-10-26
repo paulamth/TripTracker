@@ -1,0 +1,35 @@
+.trip-name {
+    font-size: 17.5px;
+    font-weight: 600;
+    color: #1e1e1e;
+    margin-bottom: 7px;
+}
+
+.time{
+    margin: 0; 
+    font-size: 0.8em; 
+    color: rgb(111, 111, 111);
+}
+
+.fav-count{
+    display: flex; 
+    align-items: center; 
+    color: gray;
+}
+
+.label-custom{
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center
+}
+
+.empty-list{
+    text-align: center; 
+    margin-top: 50px
+}
+
+ion-fab {
+    margin-bottom: 13px; 
+    margin-right: 13px;  
+  }
+  

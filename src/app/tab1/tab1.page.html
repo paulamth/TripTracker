@@ -1,0 +1,121 @@
+<ion-content [fullscreen]="true">
+  <div class="header ion-padding">
+    <h1>Entdecken</h1>
+    <div class="profile-button">
+      <ion-button fill="clear" (click)="goToProfil()">
+        <ion-icon slot="icon-only" name="person-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Bildbereich mit Text -->
+  <div class="bild-section">
+    <div class="bild-text">
+      <h1>Bereit für Abenteuer?</h1>
+      <p>Entdecke neue Orte, Kulturen und Geschichten</p>
+    </div>
+  </div>
+
+  <div class="ion-padding">
+
+
+    <!-- Suchverlauf -->
+    <section class="last-search" *ngIf="getFilteredSearchHistory().length > 0">
+      <div class="container">
+        <h2>Lust auf mehr?</h2>
+        <p>Hier finden Sie alle Informationen zu Ihrem letzten gesuchten Ziel: <br> 
+          <strong>{{ getFilteredSearchHistory()[0].name }}</strong>
+        </p>
+        <a (click)="viewDetails(getFilteredSearchHistory()[0])" class="btn">
+          Mehr erfahren 
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </a>
+      </div>
+    </section>
+    
+
+  
+  <!-- Beliebte Reiseziele -->
+   <div>
+    <h2>Beliebte Reiseziele</h2>
+    <app-slider [slides]="popularDestinations" 
+                (slideClick)="onSlideClicked($event, 'popDes')" 
+                (add)="addPlace($event, 'popDes')" 
+                (delete)="deletePlace($event, 'popDes')">
+    </app-slider>
+    </div> <br>
+
+    <!-- Karte -->
+    <a class="map-button" (click)="goToMap()">
+      <img src="../../assets/img/map.jpg" alt="Kartenbild" class="map-icon">
+      <div class="explore-container">
+        <p class="explore-text">Auf der Suche nach Erlebnissen in Ihrer Umgebung?</p>
+        <p class="subtitle-text"> Jetzt erkunden </p>
+      </div>
+    </a>
+
+
+    <!-- Attraktionen in der Nähe -->
+    <h2>Das Beste aus deiner <br> Umgebung </h2>
+    <h4> Entdecke Angebote in deiner Nähe! </h4>
+    <ion-grid>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button expand="block"
+                  (click)="loadCloseAttractions('museums')"
+                  [ngClass]="{
+                    'selected-btn': selectedKind === 'museums' || selectedKind === '',
+                    'default-btn': selectedKind !== 'museums' && selectedKind !== ''
+                  }">
+        <ion-icon name="color-palette-outline"></ion-icon> &nbsp;
+        Museen
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button expand="block"
+                  (click)="loadCloseAttractions('foods')"
+                  [ngClass]="{
+                    'selected-btn': selectedKind === 'foods' || selectedKind === '',
+                    'default-btn': selectedKind !== 'foods' && selectedKind !== ''
+                  }">
+        <ion-icon name="restaurant-outline"></ion-icon> &nbsp;
+        Restaurants
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button expand="block"
+                  (click)="loadCloseAttractions('shops')"
+                  [ngClass]="{
+                    'selected-btn': selectedKind === 'shops' || selectedKind === '',
+                    'default-btn': selectedKind !== 'shops' && selectedKind !== ''
+                  }">
+        <ion-icon name="cart-outline"></ion-icon> &nbsp;
+        Shopping
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button expand="block"
+                  (click)="loadCloseAttractions('accomodations')"
+                  [ngClass]="{
+                    'selected-btn': selectedKind === 'accomodations' || selectedKind === '',
+                    'default-btn': selectedKind !== 'accomodations' && selectedKind !== ''
+                  }">
+        <ion-icon name="bed-outline"></ion-icon> &nbsp;
+        Hotels
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+    <div class="attraction-slider">
+      <app-slider [slides]="closePlaces" 
+                  (slideClick)="onSlideClicked($event, '')" 
+                  (add)="addPlace($event, '')" 
+                  (delete)="deletePlace($event, '')">
+      </app-slider>
+    </div>
+    
+  </div>
+</ion-content>
