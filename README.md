@@ -142,7 +142,7 @@ npx cap sync
 Dabei die Berechtigungen für Standort und Fotogalerie ergänzen (Android: `ACCESS_COARSE_LOCATION`,
 `ACCESS_FINE_LOCATION`; iOS: `NSLocationWhenInUseUsageDescription`, `NSPhotoLibraryUsageDescription`),
 siehe Capacitor-Dokumentation zu [Geolocation](https://capacitorjs.com/docs/apis/geolocation) und
-[Camera](https://capacitorjs.com/docs/apis/camera). Dieser Weg ist für die überarbeitete Fassung nicht getestet.
+[Camera](https://capacitorjs.com/docs/apis/camera).
 
 ## Sicherheit und Datenschutz
 
